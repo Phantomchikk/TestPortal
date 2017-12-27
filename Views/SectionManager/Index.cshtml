@@ -1,0 +1,30 @@
+﻿@model IEnumerable<WebApplication1.Models.Section>
+
+@{
+    ViewBag.Title = "Список разделов";
+}
+
+<h2>Список разделов</h2>
+
+<a asp-action="Create">Добавить раздел</a>
+
+
+<table class="table">
+    <tr><th>Название</th><th></th></tr>
+    @foreach (var sections in Model)
+    {
+        <tr>
+            <td>@sections.Name</td>
+            <td>
+                <form asp-action="Delete" asp-route-id="@sections.Id" method="post">
+                    <a class="btn btn-sm btn-primary" asp-action="Edit" asp-route-id="@sections.Id">Изменить</a>
+                    <a class="btn btn-sm btn-primary" asp-action="Tests" asp-route-id="@sections.Id">Тесты</a>
+                    <button type="submit" class="btn btn-sm btn-danger">
+                        Удалить
+                    </button>
+                </form>
+            </td>
+
+        </tr>
+    }
+</table>
