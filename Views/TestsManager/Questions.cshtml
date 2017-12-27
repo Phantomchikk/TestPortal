@@ -1,0 +1,25 @@
+﻿@model WebApplication1.Models.Test
+@{
+    ViewBag.Title = "Список вопросов теста " + Model.Name;
+}
+
+<a asp-action="CreateQuestion" asp-route-testId="@Model.Id">Добавить вопрос</a>
+
+<table class="table">
+    <tr><th>Тип</th><th>Текст</th><th></th></tr>
+    @foreach (var quest in Model.Questions)
+    {
+        <tr>
+            <td>@quest.Type</td>
+            <td>@quest.Text</td>
+            <td>
+                <form asp-action="Delete" asp-route-id="@quest.Id" asp-route-testId="@Model.Id" method="post">
+                    <a class="btn btn-sm btn-primary" asp-action="Edit" asp-route-id="@quest.Id">Изменить</a>
+                    <button type="submit" class="btn btn-sm btn-danger">
+                        Удалить
+                    </button>
+                </form>
+            </td>
+        </tr>
+    }
+</table>

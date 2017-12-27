@@ -1,0 +1,69 @@
+﻿@model WebApplication1.ViewModels.CreateQuestionViewModel
+@{
+    ViewBag.Title = "Добавление вопроса";
+}
+
+<script type="text/javascript">
+    function ChangeTypeVar()
+    {
+        if (document.getElementById("sel").getAttribute("value") == "one")
+        {
+            document.getElementById("v1").type = "checkbox";
+            document.getElementById("v2").type = "checkbox";
+            document.getElementById("v3").type = "checkbox";
+            document.getElementById("v4").type = "checkbox";
+        }
+        else
+        {
+            document.getElementById("v1").type = "radio";
+            document.getElementById("v2").type = "radio";
+            document.getElementById("v3").type = "radio";
+            document.getElementById("v4").type = "radio";
+        }
+    }
+</script>
+
+<form asp-action="CreateQuestion" asp-controller="TestsManager">
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <input asp-for="TestId" type="hidden" value="@ViewBag.TestId" />
+    <div class="form-group">
+        <label asp-for="Text" class="control-label">Текст вопроса</label>
+        <input type="text" asp-for="Text" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Type" class="control-label">Тип</label>
+        <select asp-for="Type" id="sel" class="form-control" onchange="ChangeTypeVar()">
+            <option value="one" selected>Один вариант</option>
+            <option value="multi">Несколько</option>
+        </select>
+    </div>
+    <div id="variants">
+        <div class="form-group">
+            <label asp-for="Variant1" class="control-label">Вариант 1</label>
+            <input type="text" asp-for="Variant1" class="form-control" />
+            <label asp-for="Var1IsCorrect" class="control-label">Правильный вариант</label>
+            <input type="radio" asp-for="Var1IsCorrect" id="v1" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label asp-for="Variant2" class="control-label">Вариант 2</label>
+            <input type="text" asp-for="Variant2" class="form-control" />
+            <label asp-for="Var2IsCorrect" class="control-label">Правильный вариант</label>
+            <input type="radio" asp-for="Var2IsCorrect" id="v2" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label asp-for="Variant3" class="control-label">Вариант 3</label>
+            <input type="text" asp-for="Variant3" class="form-control" />
+            <label asp-for="Var3IsCorrect" class="control-label">Правильный вариант</label>
+            <input type="radio" asp-for="Var3IsCorrect" id="v3" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label asp-for="Variant4" class="control-label">Вариант 4</label>
+            <input type="text" asp-for="Variant4" class="form-control" />
+            <label asp-for="Var4IsCorrect" class="control-label">Правильный вариант</label>
+            <input type="radio" asp-for="Var4IsCorrect" id="v4" class="form-control" />
+        </div>
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Добавить" class="btn btn-default" />
+    </div>
+</form>
