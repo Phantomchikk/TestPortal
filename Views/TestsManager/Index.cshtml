@@ -1,4 +1,4 @@
-﻿@model IEnumerable<WebApplication1.Models.Test>
+﻿@model IEnumerable<WebApplication1.ViewModels.TestViewModel>
 @{
     ViewBag.Title = "Список тестов";
 }
@@ -11,11 +11,11 @@
     {
         <tr>
             <td>@test.Name</td>
-            <td>@test.Section.Name</td>
+            <td>@test.SectionName</td>
             <td>
                 <form asp-action="Delete" asp-route-id="@test.Id" method="post">
                     <a class="btn btn-sm btn-primary" asp-action="Edit" asp-route-id="@test.Id">Изменить</a>
-                    <a class="btn btn-sm btn-primary" asp-action="Answers" asp-route-id="@test.Id">Сменить пароль</a>
+                    <a class="btn btn-sm btn-primary" asp-action="Questions" asp-route-id="@test.Id">Вопросы теста</a>
                     <button type="submit" class="btn btn-sm btn-danger">
                         Удалить
                     </button>

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 using WebApplication1.ViewModels;
 using WebApplication1.Models;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace WebApplication1.Controllers
 {
@@ -22,7 +23,12 @@ namespace WebApplication1.Controllers
 
         public IActionResult Index()
         {
-            return View(db.Tests.ToList());
+            List<TestViewModel> list = new List<TestViewModel>();
+            foreach (var test in db.Tests.Include("Section"))
+            {
+                list.Add(new TestViewModel { Id = test.Id, Name = test.Name, SectionName = test.Section.Name });
+            }
+            return View(list);
         }
 
         public IActionResult Create()
@@ -32,7 +38,7 @@ namespace WebApplication1.Controllers
             {
                 list.Add(sect.Name);
             }
-            ViewBag.Sections = list;
+            ViewBag.Sections = new SelectList(list.ToArray());
             return View();
         }
 
@@ -55,7 +61,7 @@ namespace WebApplication1.Controllers
 
         public async Task<IActionResult> Edit(int id)
         {
-            Test test = await db.Tests.FirstOrDefaultAsync(t => t.Id == id);
+            Test test = await db.Tests.Include("Section").FirstOrDefaultAsync(t => t.Id == id);
             if (test == null)
             {
                 return Content("Нет теста с таким Id");
@@ -66,7 +72,7 @@ namespace WebApplication1.Controllers
             {
                 list.Add(sect.Name);
             }
-            ViewBag.Sections = list;
+            ViewBag.Sections = new SelectList(list.ToArray());
             return View(model);
         }
 
@@ -96,13 +102,14 @@ namespace WebApplication1.Controllers
             if (test != null)
             {
                 db.Tests.Remove(test);
+                db.SaveChanges();
             }
             return RedirectToAction("Index");
         }
 
         public async Task<IActionResult> Questions(int id)
         {
-            Test test = await db.Tests.FirstOrDefaultAsync(t => t.Id == id);
+            Test test = await db.Tests.Include("Questions").FirstOrDefaultAsync(t => t.Id == id);
             if (test != null)
             {
                 return View(test);
@@ -136,7 +143,7 @@ namespace WebApplication1.Controllers
 
         public async Task<IActionResult> EditQuestion(int id)
         {
-            Question quest = await db.Questions.FirstOrDefaultAsync(q => q.Id == id);
+            Question quest = await db.Questions.Include("Variants").FirstOrDefaultAsync(q => q.Id == id);
             if (quest == null)
             {
                 return Content("Нет записи с таким Id");
@@ -168,7 +175,7 @@ namespace WebApplication1.Controllers
         {
             if (ModelState.IsValid)
             {
-                Question quest = await db.Questions.FirstOrDefaultAsync(t => t.Id == model.Id);
+                Question quest = await db.Questions.Include("Variants").FirstOrDefaultAsync(t => t.Id == model.Id);
                 if (quest != null)
                 {
                     quest.Type = model.Type;
@@ -200,6 +207,7 @@ namespace WebApplication1.Controllers
             if (quest != null)
             {
                 db.Questions.Remove(quest);
+                db.SaveChanges();
             }
             return RedirectToAction("Questions", new { id = testId });
         }

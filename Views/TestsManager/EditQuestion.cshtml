@@ -1,6 +1,6 @@
-﻿@model WebApplication1.ViewModels.CreateQuestionViewModel
+﻿@model WebApplication1.ViewModels.EditQuestionViewModel
 @{
-    ViewBag.Title = "Добавление вопроса";
+    ViewBag.Title = "Изменение вопроса";
 }
 
 <script type="text/javascript">
@@ -13,50 +13,56 @@
                 if (i != p)
                 {
                     document.getElementById("v" + i).checked = false;
-                    //document.getElementById("v" + p).value = "false";
                 }
             }
         }
     }
 </script>
 
+
+
 <form asp-action="CreateQuestion" asp-controller="TestsManager">
     <div asp-validation-summary="All" class="text-danger"></div>
-    <input asp-for="TestId" type="hidden" value="@ViewBag.TestId" />
+    <input asp-for="Id" type="hidden" value="@Model.Id" />
+    <input asp-for="TestId" type="hidden" value="@Model.TestId" />
     <div class="form-group">
         <label asp-for="Text" class="control-label">Текст вопроса</label>
         <textarea asp-for="Text"></textarea>
     </div>
     <div class="form-group">
         <label asp-for="Type" class="control-label">Тип</label>
-        <select asp-for="Type" id="sel">
-            <option value="Один правильный" selected>Один вариант</option>
-            <option value="Несколько правильных">Несколько</option>
+        <select asp-for="Type" id="sel" onchange="ChangeTypeVar()">
+            <option value="one" selected>Один вариант</option>
+            <option value="multi">Несколько</option>
         </select>
     </div>
     <div id="variants">
         <div class="form-group">
-            <label asp-for="Variant1" class="control-label">Вариант 1</label>
-            <input type="text" asp-for="Variant1" />
+            <input asp-for="Var1Id" type="hidden" value="@Model.Var1Id" />
+            <label asp-for="Var1" class="control-label">Вариант 1</label>
+            <input type="text" asp-for="Var1" />
             <input type="checkbox" asp-for="Var1IsCorrect" onchange="ChangeRadio(1)" id="v1" />
         </div>
         <div class="form-group">
-            <label asp-for="Variant2" class="control-label">Вариант 2</label>
-            <input type="text" asp-for="Variant2" />
+            <input asp-for="Var2Id" type="hidden" value="@Model.Var2Id" />
+            <label asp-for="Var2" class="control-label">Вариант 2</label>
+            <input type="text" asp-for="Var2" />
             <input type="checkbox" asp-for="Var2IsCorrect" onchange="ChangeRadio(2)" id="v2" />
         </div>
         <div class="form-group">
-            <label asp-for="Variant3" class="control-label">Вариант 3</label>
-            <input type="text" asp-for="Variant3" />
+            <input asp-for="Var3Id" type="hidden" value="@Model.Var3Id" />
+            <label asp-for="Var3" class="control-label">Вариант 3</label>
+            <input type="text" asp-for="Var3" />
             <input type="checkbox" asp-for="Var3IsCorrect" onchange="ChangeRadio(3)" id="v3" />
         </div>
         <div class="form-group">
-            <label asp-for="Variant4" class="control-label">Вариант 4</label>
-            <input type="text" asp-for="Variant4" />
+            <input asp-for="Var4Id" type="hidden" value="@Model.Var4Id" />
+            <label asp-for="Var4" class="control-label">Вариант 4</label>
+            <input type="text" asp-for="Var4" />
             <input type="checkbox" asp-for="Var4IsCorrect" onchange="ChangeRadio(4)" id="v4" />
         </div>
     </div>
     <div class="form-group">
-        <input type="submit" value="Добавить" class="btn btn-default" />
+        <input type="submit" value="Сохранить" class="btn btn-default" />
     </div>
 </form>

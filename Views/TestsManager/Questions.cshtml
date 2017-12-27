@@ -13,8 +13,8 @@
             <td>@quest.Type</td>
             <td>@quest.Text</td>
             <td>
-                <form asp-action="Delete" asp-route-id="@quest.Id" asp-route-testId="@Model.Id" method="post">
-                    <a class="btn btn-sm btn-primary" asp-action="Edit" asp-route-id="@quest.Id">Изменить</a>
+                <form asp-action="DeleteQuestion" asp-route-id="@quest.Id" asp-route-testId="@Model.Id" method="post">
+                    <a class="btn btn-sm btn-primary" asp-action="EditQuestion" asp-route-id="@quest.Id">Изменить</a>
                     <button type="submit" class="btn btn-sm btn-danger">
                         Удалить
                     </button>
