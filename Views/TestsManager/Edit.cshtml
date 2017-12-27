@@ -1,0 +1,23 @@
+﻿@model WebApplication1.ViewModels.EditTestViewModel
+@{
+    ViewBag.Title = "Редактирование теста";
+}
+
+
+<form asp-action="Edit" asp-controller="TestsManager">
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <div class="form-group">
+        <input type="hidden" asp-for="Id" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Name" class="control-label">Name</label>
+        <input type="text" asp-for="Name" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Section" class="control-label">Раздел</label>
+        <select asp-for="Section" asp-items="ViewBag.Sections"></select>
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Сохранить" class="btn btn-default" />
+    </div>
+</form>
