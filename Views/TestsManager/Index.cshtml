@@ -1,0 +1,26 @@
+﻿@model IEnumerable<WebApplication1.Models.Test>
+@{
+    ViewBag.Title = "Список тестов";
+}
+
+<a asp-action="Create">Добавить тест</a>
+
+<table class="table">
+    <tr><th>Название</th><th>Раздел</th><th></th></tr>
+    @foreach (var test in Model)
+    {
+        <tr>
+            <td>@test.Name</td>
+            <td>@test.Section.Name</td>
+            <td>
+                <form asp-action="Delete" asp-route-id="@test.Id" method="post">
+                    <a class="btn btn-sm btn-primary" asp-action="Edit" asp-route-id="@test.Id">Изменить</a>
+                    <a class="btn btn-sm btn-primary" asp-action="Answers" asp-route-id="@test.Id">Сменить пароль</a>
+                    <button type="submit" class="btn btn-sm btn-danger">
+                        Удалить
+                    </button>
+                </form>
+            </td>
+        </tr>
+    }
+</table>

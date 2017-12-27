@@ -9,9 +9,9 @@ namespace WebApplication1.Models
     {
         public int Id { get; set; }
         public int? VariantId { get; set; }
-        public int TestId { get; set; }
+        public int AttemptId { get; set; }
 
         public Variant Variant { get; set; }
-        public Test Test { get; set; }
+        public Attempt Attempt { get; set; }
     }
 }

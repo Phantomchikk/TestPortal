@@ -1,0 +1,18 @@
+﻿@model WebApplication1.ViewModels.CreateTestViewModel
+@{
+    ViewBag.Title = "Добавление теста";
+}
+<form asp-action="Create" asp-controller="TestsManager">
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <div class="form-group">
+        <label asp-for="Name" class="control-label">Name</label>
+        <input type="text" asp-for="Name" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Section" class="control-label">Раздел</label>
+        <select asp-for="Section" asp-items="ViewBag.Sections"></select>
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Добавить" class="btn btn-default" />
+    </div>
+</form>

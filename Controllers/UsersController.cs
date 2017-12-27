@@ -92,7 +92,7 @@ namespace WebApplication1.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> Delete(string id)
+        public async Task<IActionResult> Delete(string id)
         {
             User user = await _userManager.FindByIdAsync(id);
             if (user != null)
