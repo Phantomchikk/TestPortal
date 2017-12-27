@@ -21,7 +21,7 @@ namespace WebApplication1.Controllers
 
         public IActionResult Index()
         {
-            return View(db.Section.ToList());
+            return View(db.Sections.ToList());
         }
 
         [HttpGet]
@@ -42,7 +42,7 @@ namespace WebApplication1.Controllers
             if (ModelState.IsValid)
             {
                 Section section = new Section { Name = model.Name };
-                await db.Section.AddAsync(section);
+                await db.Sections.AddAsync(section);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -51,7 +51,7 @@ namespace WebApplication1.Controllers
 
         public IActionResult Edit(int id) 
         {
-            Section section = db.Section.FirstOrDefault(t => t.Id == id);
+            Section section = db.Sections.FirstOrDefault(t => t.Id == id);
             if (section == null)
             {
                 return NotFound();
@@ -73,11 +73,11 @@ namespace WebApplication1.Controllers
         {
             if (ModelState.IsValid)
             {
-                Section section = db.Section.FirstOrDefault(t => t.Id == model.Id);
+                Section section = db.Sections.FirstOrDefault(t => t.Id == model.Id);
                 if (section != null)
                 {
                     section.Name = model.Name;
-                    db.Section.Update(section);
+                    db.Sections.Update(section);
                     db.SaveChanges();
                 }
             }
@@ -88,10 +88,10 @@ namespace WebApplication1.Controllers
         [HttpPost]
         public IActionResult Delete(int id)
         {
-            Section section = db.Section.FirstOrDefault(t => t.Id == id);
+            Section section = db.Sections.FirstOrDefault(t => t.Id == id);
             if (section != null)
             {
-                db.Section.Remove(section);
+                db.Sections.Remove(section);
                 db.SaveChanges();
             }
             return RedirectToAction("Index");
