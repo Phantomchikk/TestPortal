@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace WebApplication1.Migrations
 {
-    public partial class Initial : Migration
+    public partial class FixDB : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -50,7 +50,7 @@ namespace WebApplication1.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Section",
+                name: "Sections",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -59,7 +59,7 @@ namespace WebApplication1.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Section", x => x.Id);
+                    table.PrimaryKey("PK_Sections", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -181,15 +181,15 @@ namespace WebApplication1.Migrations
                 {
                     table.PrimaryKey("PK_Tests", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Tests_Section_SectionId",
+                        name: "FK_Tests_Sections_SectionId",
                         column: x => x.SectionId,
-                        principalTable: "Section",
+                        principalTable: "Sections",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Attempt",
+                name: "Attempts",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -200,15 +200,15 @@ namespace WebApplication1.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Attempt", x => x.Id);
+                    table.PrimaryKey("PK_Attempts", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Attempt_Tests_TestId",
+                        name: "FK_Attempts_Tests_TestId",
                         column: x => x.TestId,
                         principalTable: "Tests",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Attempt_AspNetUsers_UserId1",
+                        name: "FK_Attempts_AspNetUsers_UserId1",
                         column: x => x.UserId1,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
@@ -263,16 +263,16 @@ namespace WebApplication1.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    TestId = table.Column<int>(type: "int", nullable: false),
+                    AttemptId = table.Column<int>(type: "int", nullable: false),
                     VariantId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Answers", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Answers_Tests_TestId",
-                        column: x => x.TestId,
-                        principalTable: "Tests",
+                        name: "FK_Answers_Attempts_AttemptId",
+                        column: x => x.AttemptId,
+                        principalTable: "Attempts",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
@@ -284,9 +284,9 @@ namespace WebApplication1.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Answers_TestId",
+                name: "IX_Answers_AttemptId",
                 table: "Answers",
-                column: "TestId");
+                column: "AttemptId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Answers_VariantId",
@@ -333,13 +333,13 @@ namespace WebApplication1.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Attempt_TestId",
-                table: "Attempt",
+                name: "IX_Attempts_TestId",
+                table: "Attempts",
                 column: "TestId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Attempt_UserId1",
-                table: "Attempt",
+                name: "IX_Attempts_UserId1",
+                table: "Attempts",
                 column: "UserId1");
 
             migrationBuilder.CreateIndex(
@@ -379,7 +379,7 @@ namespace WebApplication1.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Attempt");
+                name: "Attempts");
 
             migrationBuilder.DropTable(
                 name: "Variants");
@@ -397,7 +397,7 @@ namespace WebApplication1.Migrations
                 name: "Tests");
 
             migrationBuilder.DropTable(
-                name: "Section");
+                name: "Sections");
         }
     }
 }

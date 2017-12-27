@@ -133,13 +133,13 @@ namespace WebApplication1.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int>("TestId");
+                    b.Property<int>("AttemptId");
 
                     b.Property<int?>("VariantId");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("TestId");
+                    b.HasIndex("AttemptId");
 
                     b.HasIndex("VariantId");
 
@@ -163,7 +163,7 @@ namespace WebApplication1.Migrations
 
                     b.HasIndex("UserId1");
 
-                    b.ToTable("Attempt");
+                    b.ToTable("Attempts");
                 });
 
             modelBuilder.Entity("WebApplication1.Models.Question", b =>
@@ -193,7 +193,7 @@ namespace WebApplication1.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Section");
+                    b.ToTable("Sections");
                 });
 
             modelBuilder.Entity("WebApplication1.Models.Test", b =>
@@ -330,9 +330,9 @@ namespace WebApplication1.Migrations
 
             modelBuilder.Entity("WebApplication1.Models.Answer", b =>
                 {
-                    b.HasOne("WebApplication1.Models.Test", "Test")
+                    b.HasOne("WebApplication1.Models.Attempt", "Attempt")
                         .WithMany()
-                        .HasForeignKey("TestId")
+                        .HasForeignKey("AttemptId")
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("WebApplication1.Models.Variant", "Variant")
