@@ -180,16 +180,16 @@ namespace WebApplication1.Controllers
                 {
                     quest.Type = model.Type;
                     quest.Text = model.Text;
-                    quest.Variants[0].QuestionId = model.Id;
+                    //quest.Variants[0].QuestionId = model.Id;
                     quest.Variants[0].Text = model.Var1;
                     quest.Variants[0].IsCorrect = model.Var1IsCorrect;
-                    quest.Variants[1].QuestionId = model.Id;
+                    //quest.Variants[1].QuestionId = model.Id;
                     quest.Variants[1].Text = model.Var2;
                     quest.Variants[1].IsCorrect = model.Var2IsCorrect;
-                    quest.Variants[2].QuestionId = model.Id;
+                    //quest.Variants[2].QuestionId = model.Id;
                     quest.Variants[2].Text = model.Var3;
                     quest.Variants[2].IsCorrect = model.Var3IsCorrect;
-                    quest.Variants[3].QuestionId = model.Id;
+                    //quest.Variants[3].QuestionId = model.Id;
                     quest.Variants[3].Text = model.Var4;
                     quest.Variants[3].IsCorrect = model.Var4IsCorrect;
                     await db.SaveChangesAsync();

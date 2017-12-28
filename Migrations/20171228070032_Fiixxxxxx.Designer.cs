@@ -11,9 +11,10 @@ using WebApplication1.Models;
 namespace WebApplication1.Migrations
 {
     [DbContext(typeof(TestContext))]
-    partial class TestContextModelSnapshot : ModelSnapshot
+    [Migration("20171228070032_Fiixxxxxx")]
+    partial class Fiixxxxxx
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -133,7 +134,7 @@ namespace WebApplication1.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int>("AttemptId");
+                    b.Property<int?>("AttemptId");
 
                     b.Property<int?>("VariantId");
 
@@ -330,8 +331,7 @@ namespace WebApplication1.Migrations
                 {
                     b.HasOne("WebApplication1.Models.Attempt", "Attempt")
                         .WithMany("Answers")
-                        .HasForeignKey("AttemptId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("AttemptId");
 
                     b.HasOne("WebApplication1.Models.Variant", "Variant")
                         .WithMany("Answers")

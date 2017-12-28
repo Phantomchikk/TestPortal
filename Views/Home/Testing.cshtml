@@ -1,0 +1,52 @@
+﻿@model WebApplication1.ViewModels.TestingViewModel
+@{
+    ViewData["Title"] = "Тест";
+}
+
+<script type="text/javascript">
+    function ChangeRadio(p) {
+        if (document.getElementById("sel").value == "Один правильный") {
+            for (var i = 1; i < 5; i++) {
+                if (i != p) {
+                    document.getElementById("v" + i).checked = false;
+                }
+            }
+        }
+    }
+</script>
+
+
+
+<form asp-action="Testing" asp-controller="Home">
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <input asp-for="Id" type="hidden" value="@Model.Id" />
+    <input asp-for="TestId" type="hidden" value="@Model.TestId" />
+    <input asp-for="Numb" type="hidden" value="@Model.Numb" />
+    <input asp-for="AttemptId" type="hidden" value="@Model.AttemptId" />
+    <input asp-for="Type" type="hidden" value="@Model.Type" id="sel" />
+    <div class="form-group">
+        <label asp-for="Text" class="control-label">Текст вопроса</label>
+        <p name="Text">@Model.Text</p>
+    </div>
+    <div id="variants">
+        <div class="form-group">
+            <input asp-for="Var1Id" type="hidden" value="@Model.Var1Id" />
+            <p name="Var1">@Model.Var1 <input type="checkbox" asp-for="Var1IsCorrect" onchange="ChangeRadio(1)" id="v1" /></p>
+        </div>
+        <div class="form-group">
+            <input asp-for="Var2Id" type="hidden" value="@Model.Var2Id" />
+            <p name="Var2">@Model.Var2 <input type="checkbox" asp-for="Var2IsCorrect" onchange="ChangeRadio(2)" id="v2" /></p>
+        </div>
+        <div class="form-group">
+            <input asp-for="Var3Id" type="hidden" value="@Model.Var3Id" />
+            <p name="Var3">@Model.Var3 <input type="checkbox" asp-for="Var3IsCorrect" onchange="ChangeRadio(3)" id="v3" /></p>
+        </div>
+        <div class="form-group">
+            <input asp-for="Var4Id" type="hidden" value="@Model.Var4Id" />
+            <p name="Var4">@Model.Var4 <input type="checkbox" asp-for="Var4IsCorrect" onchange="ChangeRadio(4)" id="v4" /></p>
+        </div>
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Ответить" class="btn btn-default" />
+    </div>
+</form>

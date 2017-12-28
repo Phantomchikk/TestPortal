@@ -11,9 +11,10 @@ using WebApplication1.Models;
 namespace WebApplication1.Migrations
 {
     [DbContext(typeof(TestContext))]
-    partial class TestContextModelSnapshot : ModelSnapshot
+    [Migration("20171228054615_FixAttempt")]
+    partial class FixAttempt
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -329,7 +330,7 @@ namespace WebApplication1.Migrations
             modelBuilder.Entity("WebApplication1.Models.Answer", b =>
                 {
                     b.HasOne("WebApplication1.Models.Attempt", "Attempt")
-                        .WithMany("Answers")
+                        .WithMany()
                         .HasForeignKey("AttemptId")
                         .OnDelete(DeleteBehavior.Cascade);
 

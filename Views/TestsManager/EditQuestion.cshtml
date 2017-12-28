@@ -21,7 +21,7 @@
 
 
 
-<form asp-action="CreateQuestion" asp-controller="TestsManager">
+<form asp-action="EditQuestion" asp-controller="TestsManager">
     <div asp-validation-summary="All" class="text-danger"></div>
     <input asp-for="Id" type="hidden" value="@Model.Id" />
     <input asp-for="TestId" type="hidden" value="@Model.TestId" />
@@ -31,9 +31,9 @@
     </div>
     <div class="form-group">
         <label asp-for="Type" class="control-label">Тип</label>
-        <select asp-for="Type" id="sel" onchange="ChangeTypeVar()">
-            <option value="one" selected>Один вариант</option>
-            <option value="multi">Несколько</option>
+        <select asp-for="Type" id="sel">
+            <option value="Один правильный" selected>Один вариант</option>
+            <option value="Несколько правильных">Несколько</option>
         </select>
     </div>
     <div id="variants">

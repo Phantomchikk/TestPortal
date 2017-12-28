@@ -1,0 +1,8 @@
+﻿@model WebApplication1.ViewModels.TestResultViewModel
+@{
+    ViewData["Title"] = "Result";
+}
+
+<h2>Результат теста @Model.TestName</h2>
+<h3>Вы дали правильный ответ на @string.Format("{0:0.##}", Model.Result)% вопросов теста</h3>
+
